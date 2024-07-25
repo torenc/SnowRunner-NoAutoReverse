@@ -13,4 +13,4 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #add_compile_definitions(CM_NO_CONSOLE)
 
 add_subdirectory(DLL)
-add_subdirectory(Injector)
+add_subdirectory(Injector) 
