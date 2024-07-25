@@ -6,9 +6,9 @@ This is a fork of FluffierKittens SnowRunner-UI-Changes (https://github.com/Fluf
 ### AUTO REVERSE
 Disables AUTO REVERSE. The only way to reverse is now with the dedicated R gear. That's it!
 
-### ############################################################################ ###
+### ####################################################################### ###
 ### This mod is only compatible with SnowRunner.exe version 1.510203.SNOW_DLC_13 ###
-### ############################################################################ ###
+### ####################################################################### ###
 
 ## Installation
 1. build the source (see below)
