@@ -1,37 +1,16 @@
-# UI Changes for SnowRunner
-A collection of UI changes for the game SnowRunner.
+# Disable Autoreverse for Snowrunner
+This is a fork of FluffierKittens SnowRunner-UI-Changes (https://github.com/FluffierKittens/SnowRunner-UI-Changes). All I did was comment out the ATTACH/DETACH lines for everything except the AutoReverse blocking. So now it _should_ only stop AutoReverse behaviour without changing things like winching, etc. That means that the ONLY way to reverse is to shift the transmission into reverse, which is just the way I like it! Patches to SnowRunner WILL break this, so hopefully FK keeps updating their code for each new version!
 
 ## Features
 
 ### AUTO REVERSE
-Disables AUTO REVERSE. The only way to reverse is now with the dedicated R gear. NOTE: This does not apply while in fast mode (aka "control evacuator").
-
-### Quick Winch
-
-1. Press the quick winch button (Y) once to activate winch view. 
-![Winch view](https://github.com/FluffierKittens/SnowRunner-UI-Changes/assets/130815166/2692b2bb-fc6a-41c1-9cf6-b159dacdf568)
-2. With winch view on, use the camera controls to confirm that you've selected the desired winch point. 
-3. If winch view is on and you no longer wish to connect your winch, press the cancel button (B).
-4. With winch view on, press the quick winch button again to connect your winch.
-
-### Fast Mode (aka "control evacuator")
-
-Entering fast mode shifts your truck into AUTO gear. AUTO REVERSE is enabled, allowing full forward and reverse movement of the truck without exiting fast mode. 
-
-The game's default behaviour is that entering fast mode in L, H, or R leaves you unable to change direction, due to the gear shift UI being replaced. 
-
-Upon exiting fast mode, your original gear setting is restored.
-
-## Known Issues
-
-The quick winch cancel button (B) is only compatible with Xbox controllers at this time. Testing indicates that [DS4Windows](https://ds4-windows.com/) with [HidHide](https://ds4-windows.com/download/hidhide/), using Xbox 360 emulation mode, also works.
-
+Disables AUTO REVERSE. The only way to reverse is now with the dedicated R gear. That's it!
 
 This mod is only compatible with SnowRunner.exe version 1.510203.SNOW_DLC_13
 
 ## Installation
-1. Download the latest release from [here](https://github.com/FluffierKittens/SnowRunner-UI-Changes/releases).
-2. Extract *SRUIC.dll* and *SRUICInjector.exe* files from the archive. 
+1. build the source (see below)
+2. find  *SRUIC.dll* and *SRUICInjector.exe* files in the build subfolders
 3. Place *SRUIC.dll* in the game folder where SnowRunner.exe is located. 
 4. Place *SRUICInjector.exe* anywhere that you find convenient. The game folder is just fine.
 
@@ -40,12 +19,22 @@ This mod is only compatible with SnowRunner.exe version 1.510203.SNOW_DLC_13
 2. Run *SRUICInjector.exe* and make sure you get a message indicating success. 
 3. Start a new game or open an existing save, and have fun!
 
-## Building
- 
-**With only the code provided, this project will not build.**
- 
-This project requires the Microsoft Detours library. You will need to place *detours.lib* (x64 version) in the *DLL\lib* folder and *detours.h* in the *DLL\include* folder. 
- 
-For help obtaining these libraries, see the [Detours FAQ](https://github.com/microsoft/Detours/wiki/FAQ).
+## Dependencies
+This project requires Microsoft Detours, which is also available on Github (https://github.com/microsoft/Detours.git). In fact, it requires you to build the 64-bit version of Detours. Here's how I did that, after I cloned it locally:
+1. installed more dependencies, detours requires ".Net desktop build tools" along with the MSVC stuff that this code already needs
+2. open the "x64 Native Tools Command Prompt" and navigated to the detours dir.
+3. set it to do x64:
+SET DETOURS_TARGET_PROCESSOR=X64
+call "\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
+(note: I got that from the following link, I'm not 100% sure it's mandatory. https://github.com/microsoft/Detours/issues/5)
+4. then just run "nmake". That should build they 64 bit versions, you can tell because the folders they end up in are called something.X64 instead of something.X86.
+5. find detours.h in there and put it in DLL/include/detours.h
+6. find detours.lib and put it in DLL/lib/detours.lib (lib folder may not exist, make it!)
 
-In the future I may look into updating the build process so that Detours is automatically installed if needed, but for the moment I'm focusing on adding additional features.
+## Building
+I'm not a software developer, and really just muddled my way through building this with lots of help from copilot. It uses cmake, so I made a "build" subdirectory and then ran:
+cd build
+cmake ..
+cmake --build . --config Release
+
+and ended up with the two files I needed in some subfolders of the build directory.

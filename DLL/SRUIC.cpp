@@ -31,9 +31,9 @@ BOOL WINAPI DllMain(HINSTANCE hinst, DWORD dwReason, LPVOID reserved)
         DetourUpdateThread(GetCurrentThread());
         
         DETOUR_DETACH(ShiftGear) //for DAR
-		DETOUR_DETACH(GetControllerState) //for QW
-		DETOUR_DETACH(QuickWinch) //for QW
-		DETOUR_DETACH(FastModeFlagSetter) //For Fast Mode
+		//DETOUR_DETACH(GetControllerState) //for QW
+		//DETOUR_DETACH(QuickWinch) //for QW
+		//DETOUR_DETACH(FastModeFlagSetter) //For Fast Mode
 
         DetourTransactionCommit();
 
@@ -67,9 +67,9 @@ void Init()
     DetourUpdateThread(GetCurrentThread());
 
     DETOUR_ATTACH(ShiftGear) //for DAR
-	DETOUR_ATTACH(GetControllerState) //for QW
-	DETOUR_ATTACH(QuickWinch) //for QW
-	DETOUR_ATTACH(FastModeFlagSetter) //For Fast Mode
+	//DETOUR_ATTACH(GetControllerState) //for QW
+	//DETOUR_ATTACH(QuickWinch) //for QW
+	//DETOUR_ATTACH(FastModeFlagSetter) //For Fast Mode
 
     DetourTransactionCommit();
 	

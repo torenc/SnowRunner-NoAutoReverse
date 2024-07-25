@@ -1,0 +1,6 @@
+#ignore the build folder
+build/
+
+#ignore detours files
+DLL/include/detours.h
+DLL/lib/detours.lib
